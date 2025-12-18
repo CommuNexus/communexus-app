@@ -1,9 +1,17 @@
 app_name = "communexus"
-app_title = "CommuNexus ERP-360 App"
+app_title = "CommuNexus ERP-360"
 app_publisher = "CommuNexus"
 app_description = "Branding, KSA, and ZATCA features for CommuNexus ERP-360"
 app_email = "ops@communexus.com"
 app_license = "gpl-3.0"
+app_logo_url = "/assets/communexus/branding/logo-horizontal.png"
+brand_html = "CommuNexus ERP-360"
+website_context = {
+	"brand_html": "CommuNexus ERP-360",
+	"favicon": "/assets/communexus/branding/favicon-32.png",
+	"splash_image": "/assets/communexus/branding/logo-stacked.png",
+}
+after_migrate = "communexus.communexus_erp_360_app.zatca_qr.after_migrate"
 
 # Apps
 # ------------------
@@ -24,9 +32,8 @@ app_license = "gpl-3.0"
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/communexus/css/communexus.css"
-# app_include_js = "/assets/communexus/js/communexus.js"
+app_include_css = "/assets/communexus/css/branding.css"
+app_include_js = "/assets/communexus/js/branding.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/communexus/css/communexus.css"
@@ -74,10 +81,12 @@ app_license = "gpl-3.0"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "communexus.utils.jinja_methods",
-# 	"filters": "communexus.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_payload",
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_svg",
+	],
+}
 
 # Installation
 # ------------
@@ -137,13 +146,12 @@ app_license = "gpl-3.0"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Sales Invoice": {
+		"validate": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+		"on_submit": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -246,4 +254,3 @@ app_license = "gpl-3.0"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

@@ -1,0 +1,37 @@
+:root {
+	--communexus-primary: #0d5c84;
+	--communexus-accent: #28a0c7;
+}
+
+body[data-route="login"] .page-card-head .page-card-logo {
+	background-image: url("/assets/communexus/branding/logo-stacked.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 72px;
+}
+
+.navbar-brand .navbar-brand-item img {
+	content: url("/assets/communexus/branding/logo-horizontal.png");
+	height: 28px;
+}
+
+.app-logo, .app-logo > img {
+	content: url("/assets/communexus/branding/logo-horizontal.png");
+	height: 32px;
+}
+
+.navbar {
+	border-bottom: 3px solid var(--communexus-accent);
+}
+
+.navbar .btn-login,
+.page-card .btn-primary {
+	background: var(--communexus-primary);
+	border-color: var(--communexus-primary);
+}
+
+.navbar .btn-login:hover,
+.page-card .btn-primary:hover {
+	background: var(--communexus-accent);
+	border-color: var(--communexus-accent);
+}
