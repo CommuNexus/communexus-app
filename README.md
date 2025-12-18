@@ -1,33 +1,28 @@
-### CommuNexus ERP-360 App
+# CommuNexus ERP-360 App
 
-Branding, KSA, and ZATCA features for CommuNexus ERP-360
+Branding, KSA, and ZATCA features for CommuNexus ERP-360 (delivered as a separate custom Frappe app).
 
-### Installation
-
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+## Install
 
 ```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app communexus
+cd ~/communexus-bench  # or your bench path
+bench get-app https://github.com/CommuNexus/communexus-app.git
+bench --site <yoursite> install-app communexus
 ```
 
-### Contributing
+## Assets
 
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+Branding assets live under `communexus/public/branding/` and include icons, stacked + horizontal logos, and favicons sized for app/UIs.
+
+## Contributing
 
 ```bash
 cd apps/communexus
 pre-commit install
 ```
 
-Pre-commit is configured to use the following tools for checking and formatting your code:
+Pre-commit runs ruff, eslint, prettier, and pyupgrade.
 
-- ruff
-- eslint
-- prettier
-- pyupgrade
-
-### License
+## License
 
 gpl-3.0

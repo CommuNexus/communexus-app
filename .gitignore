@@ -5,3 +5,12 @@
 tags
 node_modules
 __pycache__
+.env
+.env.*
+site_config.json
+common_site_config.json
+private/
+*.pem
+*.key
+*.crt
+*.log
