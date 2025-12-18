@@ -1,9 +1,16 @@
 app_name = "communexus"
-app_title = "CommuNexus ERP-360 App"
+app_title = "CommuNexus ERP-360"
 app_publisher = "CommuNexus"
 app_description = "Branding, KSA, and ZATCA features for CommuNexus ERP-360"
 app_email = "ops@communexus.com"
 app_license = "gpl-3.0"
+app_logo_url = "/assets/communexus/branding/logo-horizontal.png"
+brand_html = "CommuNexus ERP-360"
+website_context = {
+	"brand_html": "CommuNexus ERP-360",
+	"favicon": "/assets/communexus/branding/favicon-32.png",
+	"splash_image": "/assets/communexus/branding/logo-stacked.png",
+}
 
 # Apps
 # ------------------
@@ -25,8 +32,8 @@ app_license = "gpl-3.0"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/communexus/css/communexus.css"
-# app_include_js = "/assets/communexus/js/communexus.js"
+app_include_css = "/assets/communexus/css/branding.css"
+app_include_js = "/assets/communexus/js/branding.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/communexus/css/communexus.css"
@@ -246,4 +253,3 @@ app_license = "gpl-3.0"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
