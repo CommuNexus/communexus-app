@@ -1,9 +1,17 @@
 app_name = "communexus"
-app_title = "CommuNexus ERP-360 App"
+app_title = "CommuNexus ERP-360"
 app_publisher = "CommuNexus"
 app_description = "Branding, KSA, and ZATCA features for CommuNexus ERP-360"
 app_email = "ops@communexus.com"
 app_license = "gpl-3.0"
+app_logo_url = "/assets/communexus/branding/logo-horizontal.png"
+brand_html = "CommuNexus ERP-360"
+website_context = {
+	"brand_html": "CommuNexus ERP-360",
+	"favicon": "/assets/communexus/branding/favicon-32.png",
+	"splash_image": "/assets/communexus/branding/logo-stacked.png",
+}
+after_migrate = "communexus.communexus_erp_360_app.zatca_xml.after_migrate"
 
 # Apps
 # ------------------
@@ -24,9 +32,8 @@ app_license = "gpl-3.0"
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/communexus/css/communexus.css"
-# app_include_js = "/assets/communexus/js/communexus.js"
+app_include_css = "/assets/communexus/css/branding.css"
+app_include_js = "/assets/communexus/js/branding.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/communexus/css/communexus.css"
@@ -42,8 +49,7 @@ app_license = "gpl-3.0"
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Sales Invoice": "public/js/sales_invoice.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -246,4 +252,3 @@ app_license = "gpl-3.0"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

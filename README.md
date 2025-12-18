@@ -14,6 +14,12 @@ bench --site <yoursite> install-app communexus
 
 Branding assets live under `communexus/public/branding/` and include icons, stacked + horizontal logos, and favicons sized for app/UIs.
 
+## ZATCA XML (Phase 2 readiness)
+
+- Sales Invoice fields: `ZATCA UUID` and `ZATCA XML File` (auto-managed).
+- Button: after submit, use **Export ZATCA XML** to generate a UBL 2.1 XML attachment and store UUID on the invoice.
+- Requires Company VAT to be set (uses company VAT + customer info to populate the XML).
+
 ## Contributing
 
 ```bash
