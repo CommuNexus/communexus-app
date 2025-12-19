@@ -11,7 +11,7 @@ website_context = {
 	"favicon": "/assets/communexus/branding/favicon-32.png",
 	"splash_image": "/assets/communexus/branding/logo-stacked.png",
 }
-after_migrate = "communexus.communexus_erp_360_app.zatca_xml.after_migrate"
+after_migrate = "communexus.communexus_erp_360_app.setup.after_migrate"
 
 # Apps
 # ------------------
@@ -77,14 +77,12 @@ doctype_js = {"Sales Invoice": "public/js/sales_invoice.js"}
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
 
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "communexus.utils.jinja_methods",
-# 	"filters": "communexus.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_payload",
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_svg",
+	],
+}
 
 # Installation
 # ------------
@@ -144,13 +142,15 @@ doctype_js = {"Sales Invoice": "public/js/sales_invoice.js"}
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Company": {
+		"validate": "communexus.communexus_erp_360_app.ksa.validate_company",
+	},
+	"Sales Invoice": {
+		"validate": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+		"on_submit": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
