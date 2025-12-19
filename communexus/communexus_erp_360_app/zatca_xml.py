@@ -1,13 +1,27 @@
 import uuid
 import xml.etree.ElementTree as ET
 
-import frappe
-from frappe import _
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-from frappe.utils import get_datetime
+try:
+	import frappe  # type: ignore
+	from frappe import _  # type: ignore
+except ImportError:  # pragma: no cover - used for tests without frappe
+	class _DummyFrappe:
+		@staticmethod
+		def whitelist():
+			def decorator(fn):
+				return fn
+
+			return decorator
+
+	frappe = _DummyFrappe()  # type: ignore
+
+	def _(msg):  # type: ignore
+		return msg
 
 
 def ensure_sales_invoice_fields():
+	from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+
 	create_custom_fields(
 		{
 			"Sales Invoice": [
@@ -50,8 +64,29 @@ def _add_text(parent, tag, text):
 	return el
 
 
-def build_xml(si) -> bytes:
-	company = frappe.get_doc("Company", si.company)
+def build_xml(si, company_doc=None) -> tuple[bytes, str]:
+	try:
+		from frappe.utils import get_datetime
+	except ImportError:  # pragma: no cover - requires frappe runtime
+		class _Dummy:
+			@staticmethod
+			def throw(msg, exc_cls=Exception):
+				raise exc_cls(msg)
+
+			@staticmethod
+			def get_doc(*_, **__):
+				raise ImportError("frappe not available")
+
+		def _(msg):  # type: ignore
+			return msg
+
+		frappe = _Dummy()  # type: ignore
+
+		def get_datetime(value):  # type: ignore
+			from datetime import datetime
+			return datetime.fromisoformat(str(value))
+
+	company = company_doc or frappe.get_doc("Company", si.company)
 	company_vat = (
 		getattr(company, "cn_vat_registration_no", None)
 		or company.get("tax_id")
@@ -73,7 +108,7 @@ def build_xml(si) -> bytes:
 		},
 	)
 
-	uuid_value = si.cn_zatca_uuid or str(uuid.uuid4())
+	uuid_value = getattr(si, "cn_zatca_uuid", None) or str(uuid.uuid4())
 
 	_add_text(invoice, _cbc("CustomizationID"), "urn:zatca:sa:etr:invoice:xml")
 	_add_text(invoice, _cbc("ProfileID"), "reporting:1.0")
@@ -120,6 +155,8 @@ def build_xml(si) -> bytes:
 
 @frappe.whitelist()
 def export_zatca_xml(name: str):
+	import frappe
+
 	si = frappe.get_doc("Sales Invoice", name)
 	if si.docstatus != 1:
 		frappe.throw(_("Submit the Sales Invoice before exporting ZATCA XML."))

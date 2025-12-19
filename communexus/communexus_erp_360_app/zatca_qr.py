@@ -3,12 +3,11 @@ import io
 from datetime import datetime
 
 import pyqrcode
-import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-from frappe.utils import get_datetime
 
 
 def ensure_sales_invoice_fields():
+	from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+
 	create_custom_fields(
 		{
 			"Sales Invoice": [
@@ -59,6 +58,12 @@ def _qr_svg_data_uri(data: str) -> str:
 
 
 def generate_for_sales_invoice(doc) -> tuple[str | None, str | None]:
+	try:
+		import frappe
+		from frappe.utils import get_datetime
+	except ImportError as exc:  # pragma: no cover - requires frappe runtime
+		raise RuntimeError("frappe is required to generate ZATCA QR") from exc
+
 	company = doc.company
 	if not company:
 		return (None, None)
@@ -91,6 +96,8 @@ def update_sales_invoice_qr(doc, _):
 
 
 def ensure_print_format():
+	import frappe
+
 	name = "CommuNexus Sales Invoice (ZATCA QR)"
 	if frappe.db.exists("Print Format", name):
 		return
