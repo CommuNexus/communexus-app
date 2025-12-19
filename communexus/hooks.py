@@ -11,7 +11,11 @@ website_context = {
 	"favicon": "/assets/communexus/branding/favicon-32.png",
 	"splash_image": "/assets/communexus/branding/logo-stacked.png",
 }
+<<<<<<< HEAD
+after_migrate = "communexus.communexus_erp_360_app.zatca_qr.after_migrate"
+=======
 after_migrate = "communexus.communexus_erp_360_app.ksa.after_migrate"
+>>>>>>> origin/develop
 
 # Apps
 # ------------------
@@ -82,10 +86,12 @@ app_include_js = "/assets/communexus/js/branding.js"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "communexus.utils.jinja_methods",
-# 	"filters": "communexus.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_payload",
+		"communexus.communexus_erp_360_app.zatca_qr.communexus_zatca_qr_svg",
+	],
+}
 
 # Installation
 # ------------
@@ -146,8 +152,14 @@ app_include_js = "/assets/communexus/js/branding.js"
 # Hook on document methods and events
 
 doc_events = {
+<<<<<<< HEAD
+	"Sales Invoice": {
+		"validate": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+		"on_submit": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+=======
 	"Company": {
 		"validate": "communexus.communexus_erp_360_app.ksa.validate_company",
+>>>>>>> origin/develop
 	}
 }
 
