@@ -17,8 +17,14 @@ Branding assets live under `communexus/public/branding/` and include icons, stac
 ## ZATCA QR (Phase 1)
 
 - Sales Invoice fields: `ZATCA QR (Base64 TLV)` and `ZATCA QR SVG` (auto-populated on validate/submit when Company VAT is present).
-- Print format added: **CommuNexus Sales Invoice (ZATCA QR)** embeds the QR image; select it when printing.
+- Print format: **CommuNexus Sales Invoice (ZATCA QR)** embeds the QR image; select it when printing.
 - QR payload uses seller name, VAT number, invoice timestamp, grand total, and VAT amount per ZATCA Phase 1.
+
+## ZATCA XML (Phase 2 readiness)
+
+- Sales Invoice fields: `ZATCA UUID` and `ZATCA XML File` (auto-managed).
+- Button: after submit, use **Export ZATCA XML** to generate a UBL 2.1 XML attachment and store UUID on the invoice.
+- Requires Company VAT to be set (uses company VAT + customer info to populate the XML).
 
 ## KSA defaults
 
