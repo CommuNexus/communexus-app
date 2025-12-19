@@ -32,6 +32,7 @@ after_migrate = "communexus.communexus_erp_360_app.zatca_qr.after_migrate"
 # Includes in <head>
 # ------------------
 
+# include js, css files in header of desk.html
 app_include_css = "/assets/communexus/css/branding.css"
 app_include_js = "/assets/communexus/js/branding.js"
 
