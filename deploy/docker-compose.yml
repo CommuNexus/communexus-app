@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  redis-cache:
+    image: redis:6
+    restart: unless-stopped
+
+  redis-queue:
+    image: redis:6
+    restart: unless-stopped
+
+  redis-socketio:
+    image: redis:6
+    restart: unless-stopped
+
+  backend:
+    image: frappe/erpnext-worker:${FRAPPE_VERSION}
+    restart: unless-stopped
+    command: bench start
+    environment:
+      SITE_NAME: ${SITE_NAME}
+      DB_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - mariadb
+      - redis-cache
+      - redis-queue
+      - redis-socketio
+
+  scheduler:
+    image: frappe/erpnext-worker:${FRAPPE_VERSION}
+    restart: unless-stopped
+    command: bench worker --queue short,default,long
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+
+volumes:
+  dbdata:
+  sites:
