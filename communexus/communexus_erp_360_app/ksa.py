@@ -7,14 +7,12 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 def ensure_defaults():
 	"""Set KSA defaults if not already configured."""
-	global_defaults = frappe.get_single("Global Defaults")
 	system_settings = frappe.get_single("System Settings")
 
-	if not global_defaults.default_country:
-		global_defaults.default_country = "Saudi Arabia"
-	if not global_defaults.default_currency:
-		global_defaults.default_currency = "SAR"
-	global_defaults.save()
+	if not frappe.db.get_default("country"):
+		frappe.db.set_default("country", "Saudi Arabia")
+	if not frappe.db.get_default("currency"):
+		frappe.db.set_default("currency", "SAR")
 
 	if not system_settings.time_zone:
 		system_settings.time_zone = "Asia/Riyadh"
