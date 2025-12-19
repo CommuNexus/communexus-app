@@ -20,6 +20,17 @@ Branding assets live under `communexus/public/branding/` and include icons, stac
 - Print format added: **CommuNexus Sales Invoice (ZATCA QR)** embeds the QR image; select it when printing.
 - QR payload uses seller name, VAT number, invoice timestamp, grand total, and VAT amount per ZATCA Phase 1.
 
+## KSA defaults
+
+- Defaults applied (idempotently) on migrate: country = Saudi Arabia, currency = SAR, timezone = Asia/Riyadh, English + Arabic enabled.
+- Company custom fields: VAT Registration Number (15 digits), Commercial Registration, National Address fields.
+- VAT helper: creates a `KSA VAT 15% - <Company>` template when a default company exists.
+- Run manually if needed:
+
+```bash
+bench --site <yoursite> execute communexus.communexus_erp_360_app.ksa.bootstrap
+```
+
 ## Contributing
 
 ```bash

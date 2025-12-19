@@ -11,7 +11,11 @@ website_context = {
 	"favicon": "/assets/communexus/branding/favicon-32.png",
 	"splash_image": "/assets/communexus/branding/logo-stacked.png",
 }
+<<<<<<< HEAD
 after_migrate = "communexus.communexus_erp_360_app.zatca_qr.after_migrate"
+=======
+after_migrate = "communexus.communexus_erp_360_app.ksa.after_migrate"
+>>>>>>> origin/develop
 
 # Apps
 # ------------------
@@ -148,9 +152,14 @@ jinja = {
 # Hook on document methods and events
 
 doc_events = {
+<<<<<<< HEAD
 	"Sales Invoice": {
 		"validate": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
 		"on_submit": "communexus.communexus_erp_360_app.zatca_qr.update_sales_invoice_qr",
+=======
+	"Company": {
+		"validate": "communexus.communexus_erp_360_app.ksa.validate_company",
+>>>>>>> origin/develop
 	}
 }
 
