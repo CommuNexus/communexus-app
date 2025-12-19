@@ -11,6 +11,7 @@ website_context = {
 	"favicon": "/assets/communexus/branding/favicon-32.png",
 	"splash_image": "/assets/communexus/branding/logo-stacked.png",
 }
+after_migrate = "communexus.communexus_erp_360_app.ksa.after_migrate"
 
 # Apps
 # ------------------
@@ -144,13 +145,11 @@ app_include_js = "/assets/communexus/js/branding.js"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Company": {
+		"validate": "communexus.communexus_erp_360_app.ksa.validate_company",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
